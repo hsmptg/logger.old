@@ -1,0 +1,6 @@
+.cproject
+.project
+spec.d
+arduino/
+Release/
+.settings/
