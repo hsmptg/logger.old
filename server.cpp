@@ -1,19 +1,13 @@
-/*
- * server.cpp
- *
- *  Created on: 28/07/2014
- *      Author: Helio
- */
 #include "main.h"
 
 void initServer() {
 	Serial.begin(115200);
-	Serial.println("Arduino v1.0");
+	sendMsg(VERSION_STR);
 }
 
 #define CMD_SIZE 10
 
-char *getMsg(void) {
+char *getCmd(void) {
 	int c;
 	int static index;
 	char static cmd[CMD_SIZE+1];
@@ -33,6 +27,6 @@ char *getMsg(void) {
 	return 0;
 }
 
-void sendMsg(char *msg) {
+void sendMsg(const char *msg) {
 	Serial.println(msg);
 }
