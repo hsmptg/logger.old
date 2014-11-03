@@ -2,6 +2,7 @@
 
 void setup() {
 	initServer();
+	initLedBut();
 }
 
 void loop() {
@@ -11,6 +12,13 @@ void loop() {
 			case 'v':
 				sendMsg(VERSION_STR);
 				break;
+			case 'l':
+				cmdLed(cmd);
+				break;
+			case 'b':
+				cmdBut();
+				break;
 		}
 	}
+	procBut();
 }

@@ -11,6 +11,7 @@
 
 //add your includes for the project here
 #include "server.h"
+#include "ledbut.h"
 
 //end of add your includes here
 
@@ -26,7 +27,7 @@ void setup();
 #endif
 
 //add your function definitions for the project here
-#define VERSION_STR "v1.0 Arduino"
+#define VERSION_STR "v1.0 LedBut"
 
 //Do not add code below this line
 

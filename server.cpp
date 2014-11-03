@@ -28,5 +28,6 @@ char *getCmd(void) {
 }
 
 void sendMsg(const char *msg) {
-	Serial.println(msg);
+	Serial.print(msg);
+	Serial.print("\r");
 }

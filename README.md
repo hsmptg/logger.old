@@ -1,4 +1,4 @@
-Duino
+LedBut
 =====
 
-Template para criação dum projeto para placas tipo Arduino
+Projeto para controlo dum LED e obtenção do estado dum botão
