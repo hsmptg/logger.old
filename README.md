@@ -1,4 +1,4 @@
-LedBut
+Clock
 =====
 
-Projeto para controlo dum LED e obtenção do estado dum botão
+Projeto para cria�ção dum relogio

@@ -3,6 +3,7 @@
 void setup() {
 	initServer();
 	initLedBut();
+	initClock();
 }
 
 void loop() {
@@ -18,7 +19,11 @@ void loop() {
 			case 'b':
 				cmdBut();
 				break;
+			case 'c':
+				cmdClock(cmd);
+				break;
 		}
 	}
 	procBut();
+	procClock();
 }
