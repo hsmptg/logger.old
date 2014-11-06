@@ -1,5 +1,6 @@
 #include "main.h"
 #include <SD.h>
+#include <EEPROM.h>
 #include <stdio.h>
 
 File dataFile;
@@ -12,8 +13,6 @@ void initLogger() {
 	    return;
 	}
 	Serial.println("card initialized.");
-
-	dataFile = SD.open("mydata.txt", FILE_WRITE);
 }
 
 void cmdAcquire(char *cmd) {
@@ -36,11 +35,14 @@ void cmdAcquire(char *cmd) {
 }
 
 void startLog() {
-	last_tick = millis();
-
 	char filename[16];
-	sprintf(filename, "file%03d.txt", last_tick % 1000);
+	int nFile = (EEPROM.read(0) << 8) + EEPROM.read(1);
+	sprintf(filename, "file%04d.txt", nFile);
+	Serial.println(filename);
 	dataFile = SD.open(filename, FILE_WRITE);
+	nFile++;
+	EEPROM.write(0, nFile >> 8);
+	EEPROM.write(1, nFile & 0xFF);
 }
 
 #define PERIOD 100
