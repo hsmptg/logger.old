@@ -1,7 +1,7 @@
 #ifndef LEDBUT_H_
 #define LEDBUT_H_
 
-#define LED 13
+#define LED 9
 #define BUT 8
 
 void initLedBut();

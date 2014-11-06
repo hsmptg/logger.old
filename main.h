@@ -13,6 +13,8 @@
 #include "server.h"
 #include "ledbut.h"
 #include "clock.h"
+#include "logger.h"
+extern boolean bLog;
 
 //end of add your includes here
 
@@ -28,8 +30,11 @@ void setup();
 #endif
 
 //add your function definitions for the project here
-#define VERSION_STR "v1.1 Clock"
+#define VERSION_STR "v1.0 Logger"
+extern boolean bLog;
 
 //Do not add code below this line
 
 #endif /* _main_H_ */
+
+

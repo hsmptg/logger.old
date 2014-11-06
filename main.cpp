@@ -4,6 +4,7 @@ void setup() {
 	initServer();
 	initLedBut();
 	initClock();
+	initLogger();
 }
 
 void loop() {
@@ -22,8 +23,12 @@ void loop() {
 			case 'c':
 				cmdClock(cmd);
 				break;
+			case 'a':
+				cmdAcquire(cmd);
+				break;
 		}
 	}
 	procBut();
 	procClock();
+	if (bLog) tickLog();
 }
