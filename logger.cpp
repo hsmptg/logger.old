@@ -52,7 +52,7 @@ void cmdAcquire(char *cmd) {
 
 void writeSD() {
 	char str[32];
-	sprintf(str, "%d,%d,%d,%d,%d", sample, nreads, min, (int) acum/nreads, max);
+	sprintf(str, "%d,%d,%d,%d,%d", sample, nreads, min, (int) (acum/nreads), max);
 	sendMsg(str);
 	min = 1023;
 	max = nreads = acum = 0;
@@ -88,18 +88,18 @@ void startLog() {
 
 	Serial.println(filename);
 	dataFile = SD.open(filename, FILE_WRITE);
-	dataFile.println("t(1/10s),I(0..1023)");
+	dataFile.println("t(1/10s),samples,min,avg,max");
 
 }
 
 void tickLog() {
 	int v = analogRead(4);
 	if (v < min) min = v;
-	if (v < max) max = v;
+	if (v > max) max = v;
 	acum += v;
+	nreads++;
 
 	uint32_t t = millis();
-	acum += analogRead(4);
 	if (t > last_tick + PERIOD) {
 		last_tick += PERIOD;
 		writeSD();

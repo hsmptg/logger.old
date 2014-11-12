@@ -30,7 +30,7 @@ void setup();
 #endif
 
 //add your function definitions for the project here
-#define VERSION_STR "v1.0 Logger"
+#define VERSION_STR "v1.1 Logger"
 extern boolean bLog;
 
 //Do not add code below this line
