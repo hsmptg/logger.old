@@ -6,6 +6,8 @@
 File dataFile;
 uint32_t last_tick;
 int sample;
+int min, max, nreads;
+long acum;
 
 void initLogger() {
 	if (!SD.begin(10)) {
@@ -48,6 +50,25 @@ void cmdAcquire(char *cmd) {
 	}
 }
 
+void writeSD() {
+	char str[32];
+	sprintf(str, "%d,%d,%d,%d,%d", sample, nreads, min, (int) acum/nreads, max);
+	sendMsg(str);
+	min = 1023;
+	max = nreads = acum = 0;
+
+	if (bLog) {
+		if (dataFile) {
+			dataFile.println(str);
+			if ((sample % 10) == 0)
+				dataFile.flush();
+		}
+		else
+			Serial.println("error opening datalog.txt");
+		sample++;
+	}
+}
+
 #define PERIOD 100
 
 void startLog() {
@@ -55,6 +76,8 @@ void startLog() {
 
 	last_tick = millis() - PERIOD;
 	sample = 1;
+	min = 1023;
+	max = nreads = acum = 0;
 
 	// set filename
 	int nFile = (EEPROM.read(0) << 8) + EEPROM.read(1);
@@ -70,10 +93,16 @@ void startLog() {
 }
 
 void tickLog() {
+	int v = analogRead(4);
+	if (v < min) min = v;
+	if (v < max) max = v;
+	acum += v;
+
 	uint32_t t = millis();
+	acum += analogRead(4);
 	if (t > last_tick + PERIOD) {
 		last_tick += PERIOD;
-		cmdAcquire("a4");
+		writeSD();
 	}
 }
 
